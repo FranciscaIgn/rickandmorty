@@ -1,5 +1,6 @@
 const URL_BASE = "https://rickandmortyapi.com/api/"
 
+let charactercardcontainer = document.querySelector(".wrapper");
 // 1 Traer los datos de la API
 
 const getallcharacter = async() => {
@@ -43,7 +44,7 @@ const createcharactercard = async() => {
             `
             return htmlcode // return del foreach
         })
-            console.log(htmlcode)
+            
             return htmlcode // return de mi funcion grande
     }catch(error){
         console.log('no me salio :C')
@@ -52,3 +53,17 @@ const createcharactercard = async() => {
 createcharactercard()
 
 // 3 imprimir las tarjetas
+
+const printcharactercards = async() =>{
+    try{
+        const charactercollectioncards = await createcharactercard()
+        
+        charactercardcontainer.innerHTML = charactercollectioncards
+
+    }catch(error){
+        console.log('esto no me salio')
+    }
+
+}
+printcharactercards()
+
