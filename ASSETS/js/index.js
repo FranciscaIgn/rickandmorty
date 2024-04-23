@@ -1,12 +1,17 @@
 const URL_BASE = "https://rickandmortyapi.com/api/"
 
 let charactercardcontainer = document.querySelector(".wrapper");
-// 1 Traer los datos de la API
+let characterselected = document.querySelector(".character-selected");
+
+let inputcharacter = document.querySelector(".search-character");
+let searchbutton = document.querySelector(".search-button"); 
+// 1 Traer los datos de la API character
 
 const getallcharacter = async() => {
     try{
         const response = await fetch(`${URL_BASE}character`)
         const data = await response.json()
+      
 
         
         return data
@@ -18,14 +23,29 @@ const getallcharacter = async() => {
 
 getallcharacter()
 
+// 4 traer los datos de 1 solo peronaje
+const getonecharacter = async(character) => {
+    try{
+        const response = await fetch(`${URL_BASE}character/${character}`)
+        const data = await response.json()
+        
+        return (data)
+        
+    }catch(error){
+        console.log('esto no me funciono dios')
+    }
+
+}
+getonecharacter()
+
 //  2 crear tarjeta para los personajes
 
 const createcharactercard = async() => {
     try{
         const getcharacterdata = await getallcharacter()
-        console.log(getcharacterdata)
+       
         const characterdata = getcharacterdata.results
-        console.log(characterdata)
+      
 
         let htmlcode = '';
         characterdata.forEach((character) => {
@@ -36,6 +56,7 @@ const createcharactercard = async() => {
               </div>
               <div class="character-card-body">
                     <h2 class="character-title">${character.name}</h2>
+                    <p class="character-species-id">N° ${character.id}</p>
                     <h3 class="character-subtitle">Species</h3>
                     <p class="character-species-status">${character.species} - ${character.status}</p>
                     <button class="btn-character-card">Click for more Info</button>
@@ -52,13 +73,65 @@ const createcharactercard = async() => {
 }
 createcharactercard()
 
-// 3 imprimir las tarjetas
+//  5 crear tarjeta para un solo personaje
+
+const createOnecharactercard = async(character) => {
+   try{
+        const characterData = await getonecharacter(character)
+        
+        let htmlcode =`
+        <div class="one-character-card">
+           <div class="one-character-header">
+               <div class="one-character-img">
+                  <img src="${characterData.image}" alt="${characterData.name}">
+           </div>
+        <h2 class="one-character-name">${characterData.name}</h2>
+           <p class="one-character-status"> ${characterData.status}</p>
+            <p class="one-character-species">${characterData.species}</p>
+            <p class="character-id">N° ${characterData.id}</p>
+        <div class="one-character-body">
+          <p class="character-info> Type: <span class="character-text">${characterData.type}</span></p>
+          <p class="character-info> Gender: <span class="character-text">${characterData.gender}</span></p> 
+        </div>
+
+        <div>
+               <canvas id="myChart">
+
+
+               </canvas>
+        </div>    
+       `
+        console.log(htmlcode)
+        return htmlcode
+        
+
+    }catch(error){
+          console.log('no me esta funcionando')
+    }
+}
+
+
+ //6 imprimir la tarjeta del character 
+
+const printonecharactercard = async(character) => {
+    try{
+       const charactercard = await createOnecharactercard(character)
+
+        characterselected.innerHTML = charactercard
+
+
+    }catch(error){
+        console.log('ya vali madre')
+    }
+}
+
+ // 3 imprimir las tarjetas
 
 const printcharactercards = async() =>{
-    try{
-        const charactercollectioncards = await createcharactercard()
-        
-        charactercardcontainer.innerHTML = charactercollectioncards
+   try{
+       const charactercollectioncards = await createcharactercard()
+      
+       charactercardcontainer.innerHTML = charactercollectioncards
 
     }catch(error){
         console.log('esto no me salio')
@@ -66,4 +139,16 @@ const printcharactercards = async() =>{
 
 }
 printcharactercards()
+
+
+searchbutton.addEventListener('click' , async() => {
+    let character = inputcharacter.value
+
+    await printonecharactercard(character)
+
+   
+})
+
+
+
 
