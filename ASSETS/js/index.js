@@ -59,15 +59,9 @@ const createcharactercard = async() => {
                     <p class="character-species-id">N° ${character.id}</p>
                     <h3 class="character-subtitle">Species</h3>
                     <p class="character-species-status">${character.species} - ${character.status}</p>
-                    <button class="btn-character-card">Click for more Info</button>
+                    
               </div>
-            </div>
-
-            <div>
-            <canvas id="myChart">
-
-            </canvas>
-           </div>    
+             </div>
             `
             return htmlcode // return del foreach
         })
@@ -101,6 +95,12 @@ const createOnecharactercard = async(character) => {
           <p class="character-info> origin: <span class="character-text">${characterData.origin}</span></p>
           <p class="character-info> location: <span class="character-text">${characterData.location}</span></p> 
         </div>
+
+        <div>
+            <canvas id="myChart">
+
+            </canvas>
+           </div>    
        `
         console.log(htmlcode)
         return htmlcode
@@ -114,15 +114,16 @@ const createOnecharactercard = async(character) => {
 
  //6 imprimir la tarjeta del character 
 
-const printonecharactercard = async() => {
+const printonecharactercard = async(character) => {
     try{
        
-
+       const getchracter = await getonecharacter(character)
+       
        const charactercard = await createOnecharactercard(character)
 
         characterselected.innerHTML = charactercard
         
-        
+        createcharacterChart(getchracter)
 
     }catch(error){
         console.log('ya vali madre')
@@ -131,16 +132,14 @@ const printonecharactercard = async() => {
 
  // 3 imprimir las tarjetas
 
-const printcharactercards = async(character) =>{
+const printcharactercards = async() =>{
    try{
 
-       const getchracter = await getonecharacter(character)
-
-       const charactercollectioncards = await createcharactercard()
+      const charactercollectioncards = await createcharactercard()
       
        charactercardcontainer.innerHTML = charactercollectioncards
 
-       createcharacterChart(getchracter)
+       
 
     }catch(error){
         console.log('esto no me salio')

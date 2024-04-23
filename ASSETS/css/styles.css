@@ -9,7 +9,7 @@
 body{
     width: 100vw;
     height: auto;
-    background: linear-gradient(90deg, #00ffff,  #449e9e,  #223535);
+    background: linear-gradient(90deg, #000000,  #2e3e42,  #03275e);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -39,5 +39,149 @@ hr{
     width: 90%;
     margin: 1rem;
 }
+
+.search-character{
+    width: 20rem;
+    height: 1rem;
+    font-size: 1.5rem;
+    border-radius: 20px;
+    background-color: #223535;
+    padding: 1rem;
+    color: aliceblue;
+    font-family: "Delicious Handrawn", cursive;
+}
+
+.search-button{
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-left: 100px;
+    margin-top: 1rem;
+    background-color: #00ffff;
+    padding: 0.5rem;
+    border-radius: 20px;
+    
+}
+
+.container{
+    width: 100%;
+    margin: 0 auto;
+}
+
+
+.wrapper{
+    margin-top: 1rem;
+    width: 100%;
+    height: auto;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    border-radius: 10%;
+}
+
+.character-card{
+    width:20rem;
+    height: 10rem;
+    background-color: #1a5c5e;
+    margin: 1rem;
+    display: flex;
+    border-radius: 20px;
+}
+
+
+.character-img > img{
+    width: 80%;
+    height:80%;
+    margin: 1rem;
+    padding-left: 1rem;
+    
+}
+
+.character-card-body{
+    width: 70%;
+    height:100%;
+    
+}
+
+.character-card-body > h2{
+    font-size: 1.2rem;
+    text-align: center;
+    color: rgb(178, 247, 6);
+    margin-top: 2rem;
+    font-family: "Delicious Handrawn", cursive;
+}
+
+.character-card-body > p{
+    font-size: 0.8rem;
+    text-align: center;
+    color: aliceblue;
+    margin-top: 0.5rem;
+}
+.character-card-body > h3{
+    font-size: 1rem;
+    text-align: center;
+    color: aliceblue;
+    margin-top: 0.5rem;
+}
+
+.one-character-card{
+    width:auto;
+    height: 50rem;
+    margin: 1rem;
+    display: flex;
+    border-radius: 20px;
+}
+
+.one-character-img > img{
+    width: 80%;
+    height:80%;
+    margin: 1rem;
+    margin-left: 2.2rem;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.one-character-name{
+    font-size: 2rem;
+    text-align: center;
+    color: #b2f706;
+    margin-top: 2rem;
+    font-family: "Delicious Handrawn", cursive;
+}
+
+.one-character-status{
+    font-size: 1rem;
+    text-align: center;
+    color: #ffffff;
+    margin-top: 2rem;
+
+}
+
+.character-id{
+    font-size: 1rem;
+    text-align: center;
+    color: #b2f706;
+    margin-top: 2rem;
+
+}
+
+.one-character-species{
+    font-size: 1rem;
+    text-align: center;
+    color: #ffffff;
+    margin-top: 2rem;
+
+}
+
+.one-character-body > p{
+    font-size: 0.8rem;
+    text-align: center;
+    color: #ffffff;
+    margin-top: 2rem;
+
+}
+
 
 
