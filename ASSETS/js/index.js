@@ -62,6 +62,12 @@ const createcharactercard = async() => {
                     <button class="btn-character-card">Click for more Info</button>
               </div>
             </div>
+
+            <div>
+            <canvas id="myChart">
+
+            </canvas>
+           </div>    
             `
             return htmlcode // return del foreach
         })
@@ -91,15 +97,10 @@ const createOnecharactercard = async(character) => {
             <p class="character-id">N° ${characterData.id}</p>
         <div class="one-character-body">
           <p class="character-info> Type: <span class="character-text">${characterData.type}</span></p>
-          <p class="character-info> Gender: <span class="character-text">${characterData.gender}</span></p> 
+          <p class="character-info> Gender: <span class="character-text">${characterData.gender}</span></p>
+          <p class="character-info> origin: <span class="character-text">${characterData.origin}</span></p>
+          <p class="character-info> location: <span class="character-text">${characterData.location}</span></p> 
         </div>
-
-        <div>
-               <canvas id="myChart">
-
-
-               </canvas>
-        </div>    
        `
         console.log(htmlcode)
         return htmlcode
@@ -113,12 +114,15 @@ const createOnecharactercard = async(character) => {
 
  //6 imprimir la tarjeta del character 
 
-const printonecharactercard = async(character) => {
+const printonecharactercard = async() => {
     try{
+       
+
        const charactercard = await createOnecharactercard(character)
 
         characterselected.innerHTML = charactercard
-
+        
+        
 
     }catch(error){
         console.log('ya vali madre')
@@ -127,11 +131,16 @@ const printonecharactercard = async(character) => {
 
  // 3 imprimir las tarjetas
 
-const printcharactercards = async() =>{
+const printcharactercards = async(character) =>{
    try{
+
+       const getchracter = await getonecharacter(character)
+
        const charactercollectioncards = await createcharactercard()
       
        charactercardcontainer.innerHTML = charactercollectioncards
+
+       createcharacterChart(getchracter)
 
     }catch(error){
         console.log('esto no me salio')
@@ -148,6 +157,35 @@ searchbutton.addEventListener('click' , async() => {
 
    
 })
+
+// 7 crear funcion de chatjs
+
+const createcharacterChart = (character) => {
+    const ctx = document.getElementById('myChart');
+
+    new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: [`${character.species}`,
+                 `${character.species}`,
+                 `${character.species}`,
+                 `${character.species}`],
+        datasets: [{
+          label: 'species',
+          data: [1, 2, 3, 4, 5, 6],
+          borderWidth: 1
+        }]
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    });
+}
+
 
 
 
